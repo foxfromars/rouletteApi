@@ -11,7 +11,7 @@ async function initiateLogin() {
     "https://www.leovegas.com/pt-br/jogo/roleta-brasileira-ao-vivo"
   );
   page.setDefaultNavigationTimeout(0);
-  await delay(5000);
+  await delay(10000);
   await page.type(
     ".c4RS2 > fieldset:nth-child(1) > label:nth-child(1) > div:nth-child(1) > input:nth-child(1)",
     "raposo.work.luis@gmail.com"
@@ -23,9 +23,9 @@ async function initiateLogin() {
   await page.screenshot({ path: "loginProcesso.png" });
   await page.focus("button.-t8wB:nth-child(1) > canvas:nth-child(1)");
   await page.keyboard.press("Enter");
-  await delay(4000);
+  await delay(9000);
   await page.click(".fFINL");
-  await delay(45000);
+  await delay(50000);
   return { browser, page}
 }
 
