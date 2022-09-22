@@ -8,14 +8,10 @@ async function selectFrame(browser , page){
     const contentFrame = await iframeHandle.contentFrame();
     // await contentFrame.waitForSelector("li.sidebar-buttons__item:nth-of-type(5)")
     await contentFrame.evaluate(()=>{
-      Array.from(
-        document.querySelectorAll("li.sidebar-buttons__item")
-      ).map((e,index)=>{
-        if(index===4){
-          e.click
-        } 
-      })
-    });
+    await contentFrame.evaluate(()=>{
+      document.querySelector("li.sidebar-buttons__item:nth-of-type(5)").click;
+    })
+    await delay(1000)
     // await contentFrame.waitForSelector(
     //   ".roulette-history-extended__contentxfUxn2lfztU7EVIL05oM > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)"
     // );"li.sidebar-buttons__item"
