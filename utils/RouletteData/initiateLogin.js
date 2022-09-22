@@ -3,8 +3,7 @@ const delay = require("./delay");
 
 async function initiateLogin() {
   const browser = await puppeteer.launch({
-  args: ['--no-sandbox'],
-  headless: false,
+  args: ['--no-sandbox']
   });
   const page = await browser.newPage();
   page.setDefaultNavigationTimeout(0);
