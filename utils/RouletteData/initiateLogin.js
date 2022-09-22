@@ -2,7 +2,12 @@ const puppeteer = require("puppeteer");
 const delay = require("./delay");
 
 async function initiateLogin() {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+  args: [
+    '--no-sandbox',
+    '--disable-setuid-sandbox',
+  ],
+  });
   const page = await browser.newPage();
   page.setDefaultNavigationTimeout(0);
   await page.goto(
