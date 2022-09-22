@@ -1,6 +1,8 @@
 const puppeteer = require('puppeteer');
+const delay = require('./delay');
 
 async function selectFrame(browser , page){
+    await delay(5000);
     await page.waitForSelector("iframe");
     const iframeHandle = await page.$("iframe");
     const contentFrame = await iframeHandle.contentFrame();

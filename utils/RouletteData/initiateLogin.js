@@ -3,14 +3,16 @@ const delay = require("./delay");
 
 async function initiateLogin() {
   const browser = await puppeteer.launch({
-  args: ['--no-sandbox']});
+  args: ['--no-sandbox'],
+  headless: false,
+  });
   const page = await browser.newPage();
   page.setDefaultNavigationTimeout(0);
   await page.goto(
     "https://www.leovegas.com/pt-br/jogo/roleta-brasileira-ao-vivo"
   );
   page.setDefaultNavigationTimeout(0);
-  await delay(4000);
+  await delay(5000);
   await page.type(
     ".c4RS2 > fieldset:nth-child(1) > label:nth-child(1) > div:nth-child(1) > input:nth-child(1)",
     "raposo.work.luis@gmail.com"
@@ -22,9 +24,9 @@ async function initiateLogin() {
   await page.screenshot({ path: "loginProcesso.png" });
   await page.focus("button.-t8wB:nth-child(1) > canvas:nth-child(1)");
   await page.keyboard.press("Enter");
-  await delay(3000);
+  await delay(4000);
   await page.click(".fFINL");
-  await delay(40000);
+  await delay(45000);
   return { browser, page}
 }
 
