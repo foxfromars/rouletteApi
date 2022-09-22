@@ -23,6 +23,8 @@ async function restart() {
 }
 restart();
 
+const port = process.env.PORT || 8000
+
 const app = express();
 
 app.use(express.json()); // for parsing application/json
@@ -66,6 +68,6 @@ app.get("/rouletteHistory", async (req, res) => {
   }
 });
 
-app.listen(8000, () => {
+app.listen(port, () => {
   console.log("we are listening");
 });
