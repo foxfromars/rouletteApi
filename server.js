@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const express = require("express");
 const LoginVerification = require("./utils/loginVerification");
-const rouletteDataUpdate = require("./utils/rouletteDataUpdate");
 const rouletteHistoryQuery = require("./utils/rouletteHistoryQuery");
 const dozenCounter = require("./utils/dataProcessing/dozenCounter");
 const columnCounter = require("./utils/dataProcessing/columnCounter");
@@ -11,17 +10,6 @@ const cors = require("cors");
 require('dotenv').config();
 
 mongoose.connect("mongodb+srv://rouletteDatabase:quevoa05@cluster0.tttmthz.mongodb.net/?retryWrites=true&w=majority");
-// Iniciando o Scraping e update do banco de dados
-// e reiniciando conforme necessário
-async function restart() {
-  try {
-    rouletteDataUpdate();
-  } catch (err) {
-    console.log(err + "server restarting");
-    restart();
-  }
-}
-restart();
 
 const port = process.env.PORT || 8000
 
