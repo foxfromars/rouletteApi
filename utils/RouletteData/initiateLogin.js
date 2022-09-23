@@ -3,6 +3,7 @@ const delay = require("./delay");
 
 async function initiateLogin() {
   const browser = await puppeteer.launch({
+  headless: true,
   args: ['--no-sandbox']
   });
   const page = await browser.newPage();
