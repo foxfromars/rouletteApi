@@ -38,8 +38,8 @@ app.post("/login", async (req, res) => {
 
 app.get("/rouletteHistory", async (req, res) => {
   const rouletteHistory = await rouletteHistoryQuery();
-  if (rouletteHistory === null) {
-    res.send("ServerError, wait a minute or contact the support");
+    if (rouletteHistory === null){
+      res.send('server erro, please contact the suport for information');
   } else {
     const rouletteDozenCounter = dozenCounter(rouletteHistory);
     const rouletteColumnCounter = columnCounter(rouletteHistory);

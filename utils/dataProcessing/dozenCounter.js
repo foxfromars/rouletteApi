@@ -1,5 +1,4 @@
 function dozenCounter(array) {
-  console.log(array);
   let firstDozen = 0;
   let secondDozen = 0;
   let thirdDozen = 0;
