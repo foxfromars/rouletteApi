@@ -33,7 +33,7 @@ app.use(function (_, res, next) {
 app.post("/login", async (req, res) => {
   const adminUsername = 'adminVegasRoulett';
   const adminPassword = 'admin1296##';
-  const fingerprint = req.headers['user-agent'] + req.ip;
+  const fingerprint = req.headers['user-agent'];
   if(req.body.username == adminUsername && req.body.password == adminPassword){
     const adminToken = jwt.sign('admin',process.env.ACESS_TOKEN_SECRET);
     res.json(adminToken);
@@ -50,7 +50,7 @@ app.post("/login", async (req, res) => {
 });
 
 app.post("/deviceCheck", async (req,res)=>{
-  const fingerprint = req.headers['user-agent'] + req.ip;
+  const fingerprint = req.headers['user-agent'];
   const result = await deviceCheck(req.body.username, fingerprint);
   if(result === true) {
     res.json({"device": true})
