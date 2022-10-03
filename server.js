@@ -60,11 +60,6 @@ app.post("/deviceCheck", async (req,res)=>{
   }
 })
 
-app.get("/user", async(req, res) => {
-  console.log(req.socket.remoteAddress);
-  res.send(req.socket.remoteAddress)
-})
-
 app.post("/admin/account/insert",async (req, res) => {
   console.log(req.body)
   const result = await insertCredentials(req.body) 

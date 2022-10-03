@@ -6,9 +6,6 @@ async function deviceCheck(username, fingerprint){
       username : username,
       fingerprint : fingerprint
     })
-    console.log(username)
-    console.log(fingerprint)
-    console.log(result)
     if(result !== null){
       return true
     }
