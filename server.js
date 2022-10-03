@@ -8,6 +8,7 @@ const dozenCounter = require("./utils/dataProcessing/dozenCounter");
 const columnCounter = require("./utils/dataProcessing/columnCounter");
 const brotherNumberCounter = require("./utils/dataProcessing/brotherNumberCounter");
 const repCounter = require('./utils/dataProcessing/repCounter');
+const deviceCheck = require('./utils/deviceManagement/deviceCheck.js')
 const cors = require("cors");
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
@@ -32,12 +33,14 @@ app.use(function (_, res, next) {
 app.post("/login", async (req, res) => {
   const adminUsername = 'adminVegasRoulett';
   const adminPassword = 'admin1296##';
+  const fingerprint = req.headers['user-agent'] + req.socket.remoteAddress;
   if(req.body.username == adminUsername && req.body.password == adminPassword){
     const adminToken = jwt.sign('admin',process.env.ACESS_TOKEN_SECRET);
     res.json(adminToken);
   }
   else {
-    const result = await LoginVerification(req.body);
+    console.log(fingerprint);
+    const result = await LoginVerification(req.body,fingerprint);
      if (result === true) {
        const acessToken = jwt.sign('user',process.env.ACESS_TOKEN_SECRET);
        res.json(acessToken);
@@ -47,6 +50,21 @@ app.post("/login", async (req, res) => {
   }
 });
 
+app.post("/deviceCheck", async (req,res)=>{
+  const fingerprint = req.headers['user-agent'] + req.socket.remoteAddress;
+  const result = await deviceCheck(req.body.username, fingerprint);
+  if(result === true) {
+    res.json({"device": true})
+  }
+  else if(result === false){
+    res.json({"device": false})
+  }
+})
+
+app.get("/user", async(req, res) => {
+  console.log(req.socket.remoteAddress);
+  res.send(req.socket.remoteAddress)
+})
 
 app.post("/admin/account/insert",async (req, res) => {
   console.log(req.body)
@@ -83,6 +101,7 @@ app.post("/authenticate", authenticateToken, (req, res)=>{
   if(req.user === 'admin') return res.json({'privilege' : 'admin'});
   if(req.user === 'user') return res.json({'privilege' : 'user'});
 })
+
 
 function authenticateToken(req,res,next){
   const authHeader = req.headers['authorization'];
